@@ -1,0 +1,43 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ffd6e8, #ffeef5);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+  position: relative;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+.buttons {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+button {
+  font-size: 18px;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+#yes {
+  background-color: #ff5c8a;
+  color: white;
+}
+
+#no {
+  position: absolute;
+  background-color: #ccc;
+}
