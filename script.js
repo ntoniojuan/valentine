@@ -6,12 +6,12 @@ let yesScale = 1;
 let noButtons = [document.getElementById("no")];
 
 const noTexts = [
-  "NO 😠","pls stop","why tho","WAIT","DUMPLING PLEASE","😭😭😭","hhMMMMPPPh",
+  "NO 😠","pls stop","why tho","WAIT","DUMPLING PLEASE","😭😭😭","ok fine?",
   "STOP HOVERING","NOT TODAY 😤","try again maybe?","seriously?",
-  "🤯🤯🤯","I’m shy…","think again!"
+  "🤯🤯🤯","I’m shy…","think again!", "hhMMMPPPhhh"
 ];
 
-// Move NO button with chaos but readable
+// Move NO button (slower for chasing fun)
 function moveNoButton(e) {
   e.preventDefault();
   const btn = e.target;
@@ -32,22 +32,25 @@ function moveNoButton(e) {
     y < yesButton.offsetTop + yesButton.offsetHeight
   );
 
+  // SLOW movement using CSS transition
+  btn.style.transition = "left 0.6s ease, top 0.6s ease, transform 0.3s ease";
+
   btn.style.left = `${x}px`;
   btn.style.top = `${y}px`;
 
-  // random size 0.8–1.5
-  const scale = 0.8 + Math.random() * 0.7;
+  // random size 0.9–1.2
+  const scale = 0.9 + Math.random() * 0.3;
   btn.style.transform = `scale(${scale})`;
 
   // random NO text
   btn.textContent = noTexts[Math.floor(Math.random() * noTexts.length)];
 
   // YES button grows slightly
-  yesScale += 0.05;
+  yesScale += 0.03;
   yesButton.style.transform = `scale(${yesScale})`;
 
   // occasionally clone NO button (max 3)
-  if (noButtons.length < 3 && Math.random() < 0.3) {
+  if (noButtons.length < 3 && Math.random() < 0.25) {
     const clone = btn.cloneNode(true);
     clone.id = "";
     container.appendChild(clone);
