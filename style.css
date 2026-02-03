@@ -1,21 +1,23 @@
+/* BACKGROUND */
 body {
   font-family: Arial, sans-serif;
-  background: #f2e8cf; /* Champagne Mist */
+  background: #386641; /* Hunter Green */
   height: 100vh;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
+  overflow: hidden; /* NO buttons can go outside viewport */
 }
 
 /* POLAROID CONTAINER */
 .container {
   text-align: center;
-  background: #6a994e; /* Sage Green */
+  background: #f2e8cf; /* Champagne Mist */
   border: 8px solid #386641; /* Hunter Green frame */
   border-radius: 12px;
-  padding: 30px 20px 50px 20px; /* extra bottom for polaroid feel */
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  padding: 30px 20px 50px 20px; 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
   position: relative;
   width: 320px;
 }
@@ -23,7 +25,7 @@ body {
 /* MESSAGE */
 h1 {
   margin-bottom: 30px;
-  color: #386641; /* Hunter Green */
+  color: #386641; /* dark text */
 }
 
 /* BUTTONS */
@@ -39,12 +41,15 @@ button {
 #yes {
   background-color: #bc4749; /* Blushed Brick */
   color: white;
+  position: relative; /* stays in Polaroid */
+  z-index: 100;
 }
 
 #no {
-  position: absolute;
+  position: fixed; /* can roam anywhere */
   background-color: #a7c957; /* Yellow Green */
   color: #386641;
+  z-index: 99;
 }
 
 /* YES popup */
