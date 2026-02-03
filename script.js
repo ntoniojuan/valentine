@@ -15,8 +15,8 @@ function moveNoButton(e) {
   e.preventDefault();
   const btn = e.target;
 
-  const maxX = window.innerWidth - btn.offsetWidth;
-  const maxY = window.innerHeight - btn.offsetHeight;
+  const maxX = document.documentElement.clientWidth - btn.offsetWidth;
+  const maxY = document.documentElement.clientHeight - btn.offsetHeight;
 
   let x, y;
   const yesRect = yesButton.getBoundingClientRect();
@@ -54,6 +54,8 @@ function moveNoButton(e) {
     clone.id = "";
     document.body.appendChild(clone);
     clone.style.position = "fixed";
+    clone.style.backgroundColor = "#a7c957"; // Yellow Green
+    clone.style.color = "#386641"; // Hunter Green
     clone.addEventListener("mouseover", moveNoButton);
     clone.addEventListener("touchstart", moveNoButton, { passive: false });
     noButtons.push(clone);
