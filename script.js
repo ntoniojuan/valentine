@@ -1,45 +1,64 @@
-const noButton = document.getElementById("no");
-const yesButton = document.getElementById("yes");
+const container = document.querySelector(".buttons");
+let yesScale = 1;
+
+// NO button array (includes dynamic clones)
+let noButtons = [document.getElementById("no")];
 
 const noTexts = [
-  "NO 😠","pls stop","why tho","WAIT","DUPMPLING PLEASE","😭😭😭","ok fine?",
+  "NO 😠","pls stop","why tho","WAIT","DUMPLING PLEASE","😭😭😭","ok fine?",
   "STOP HOVERING","NOT TODAY 😤","try again maybe?","seriously?",
   "🤯🤯🤯","I’m shy…","think again!"
 ];
 
-let yesScale = 1;
-
+// MOVE NO button (chaos version)
 function moveNoButton(e) {
-  e.preventDefault(); // stop accidental mobile click
-  const container = document.querySelector(".buttons");
+  e.preventDefault();
+  const btn = e.target;
 
-  const maxX = container.clientWidth - noButton.offsetWidth;
-  const maxY = container.clientHeight - noButton.offsetHeight;
+  const maxX = container.clientWidth - btn.offsetWidth;
+  const maxY = container.clientHeight - btn.offsetHeight;
 
   const x = Math.random() * maxX;
   const y = Math.random() * maxY;
 
-  noButton.style.left = `${x}px`;
-  noButton.style.top = `${y}px`;
+  // random size 0.8–1.5x
+  const scale = 0.8 + Math.random() * 0.7;
+  btn.style.transform = `scale(${scale}) rotate(${Math.random()*360}deg)`;
+
+  btn.style.left = `${x}px`;
+  btn.style.top = `${y}px`;
 
   // change text
-  const randomText = noTexts[Math.floor(Math.random() * noTexts.length)];
-  noButton.textContent = randomText;
+  btn.textContent = noTexts[Math.floor(Math.random() * noTexts.length)];
 
   // YES button grows + pulse
-  yesScale += 0.1;
+  yesScale += 0.05;
   yesButton.style.transform = `scale(${yesScale})`;
   yesButton.classList.add("pulse");
   setTimeout(() => yesButton.classList.remove("pulse"), 300);
+
+  // CHAOS: occasionally spawn clone NO button
+  if (noButtons.length < 3 && Math.random() < 0.3) { // max 3 NOs
+    const clone = btn.cloneNode(true);
+    clone.id = ""; // remove id to avoid duplicates
+    container.appendChild(clone);
+    clone.style.position = "absolute";
+    clone.style.left = `${Math.random()*maxX}px`;
+    clone.style.top = `${Math.random()*maxY}px`;
+    clone.addEventListener("mouseover", moveNoButton);
+    clone.addEventListener("touchstart", moveNoButton, { passive: false });
+    noButtons.push(clone);
+  }
 }
 
-// desktop
-noButton.addEventListener("mouseover", moveNoButton);
-
-// mobile
-noButton.addEventListener("touchstart", moveNoButton, { passive: false });
+// attach events to all existing NO buttons
+noButtons.forEach(btn => {
+  btn.addEventListener("mouseover", moveNoButton);
+  btn.addEventListener("touchstart", moveNoButton, { passive: false });
+});
 
 // YES button click
+const yesButton = document.getElementById("yes");
 yesButton.addEventListener("click", () => {
   confettiBoom();
   const popup = document.getElementById("yes-popup");
