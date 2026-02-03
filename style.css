@@ -1,10 +1,13 @@
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #ffd6e8, #ffeef5);
+  background: linear-gradient(135deg, #FFD6E8, #FFF8E7);
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 15px solid #6B8E23; /* moss green border */
+  box-sizing: border-box;
+  border-radius: 20px;
 }
 
 .container {
@@ -33,11 +36,40 @@ button {
 }
 
 #yes {
-  background-color: #ff5c8a;
+  background-color: #FF5C8A;
   color: white;
 }
 
 #no {
   position: absolute;
   background-color: #ccc;
+}
+
+/* YES popup */
+#yes-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  z-index: 999;
+}
+
+#yes-popup.hidden { display: none; }
+
+#yes-popup img { width: 200px; max-width: 80vw; margin-bottom: 20px; }
+
+/* YES pulse effect */
+#yes.pulse {
+  animation: pulse 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
