@@ -1,31 +1,32 @@
 body {
   font-family: Arial, sans-serif;
-  background: #FDF6E3; /* light cream */
+  background: #f2e8cf; /* Champagne Mist */
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 15px solid #6B8E23; /* moss green border */
-  box-sizing: border-box;
-  border-radius: 20px;
+  margin: 0;
 }
 
+/* POLAROID CONTAINER */
 .container {
   text-align: center;
+  background: #6a994e; /* Sage Green */
+  border: 8px solid #386641; /* Hunter Green frame */
+  border-radius: 12px;
+  padding: 30px 20px 50px 20px; /* extra bottom for polaroid feel */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
   position: relative;
+  width: 320px;
 }
 
+/* MESSAGE */
 h1 {
   margin-bottom: 30px;
+  color: #386641; /* Hunter Green */
 }
 
-.buttons {
-  position: relative;
-  width: 300px;
-  height: 200px;
-  margin: 0 auto;
-}
-
+/* BUTTONS */
 button {
   font-size: 18px;
   padding: 12px 24px;
@@ -36,13 +37,14 @@ button {
 }
 
 #yes {
-  background-color: #FF5C8A;
+  background-color: #bc4749; /* Blushed Brick */
   color: white;
 }
 
 #no {
   position: absolute;
-  background-color: #ccc;
+  background-color: #a7c957; /* Yellow Green */
+  color: #386641;
 }
 
 /* YES popup */
@@ -51,7 +53,7 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
+  background: #f2e8cf; /* Champagne Mist */
   padding: 20px;
   border-radius: 20px;
   text-align: center;
