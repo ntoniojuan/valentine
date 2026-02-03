@@ -1,4 +1,3 @@
-const container = document.querySelector(".buttons");
 const yesButton = document.getElementById("yes");
 let yesScale = 1;
 
@@ -6,35 +5,35 @@ let yesScale = 1;
 let noButtons = [document.getElementById("no")];
 
 const noTexts = [
-  "NO 😠","pls stop","why tho","WAIT","DUMPLING PLEASE","😭😭😭","ok fine?",
+  "NO 😠","pls stop","why tho","WAIT","DUMPLINGG PLEASE","😭😭😭","ok fine?",
   "STOP HOVERING","NOT TODAY 😤","try again maybe?","seriously?",
-  "🤯🤯🤯","I’m shy…","think again!", "hhMMMPPPhhh"
+  "🤯🤯🤯","I’m shy…","think again!"
 ];
 
-// Move NO button (slower for chasing fun)
+// Move NO button anywhere on screen
 function moveNoButton(e) {
   e.preventDefault();
   const btn = e.target;
-  const yesRect = yesButton.getBoundingClientRect();
 
-  const maxX = container.clientWidth - btn.offsetWidth;
-  const maxY = container.clientHeight - btn.offsetHeight;
+  const maxX = window.innerWidth - btn.offsetWidth;
+  const maxY = window.innerHeight - btn.offsetHeight;
 
   let x, y;
+  const yesRect = yesButton.getBoundingClientRect();
+
   // avoid YES button
   do {
     x = Math.random() * maxX;
     y = Math.random() * maxY;
   } while (
-    x + btn.offsetWidth > yesButton.offsetLeft &&
-    x < yesButton.offsetLeft + yesButton.offsetWidth &&
-    y + btn.offsetHeight > yesButton.offsetTop &&
-    y < yesButton.offsetTop + yesButton.offsetHeight
+    x + btn.offsetWidth > yesRect.left &&
+    x < yesRect.right &&
+    y + btn.offsetHeight > yesRect.top &&
+    y < yesRect.bottom
   );
 
-  // SLOW movement using CSS transition
+  // SLOW movement for chasing
   btn.style.transition = "left 0.6s ease, top 0.6s ease, transform 0.3s ease";
-
   btn.style.left = `${x}px`;
   btn.style.top = `${y}px`;
 
@@ -42,7 +41,7 @@ function moveNoButton(e) {
   const scale = 0.9 + Math.random() * 0.3;
   btn.style.transform = `scale(${scale})`;
 
-  // random NO text
+  // random text
   btn.textContent = noTexts[Math.floor(Math.random() * noTexts.length)];
 
   // YES button grows slightly
@@ -53,8 +52,8 @@ function moveNoButton(e) {
   if (noButtons.length < 3 && Math.random() < 0.25) {
     const clone = btn.cloneNode(true);
     clone.id = "";
-    container.appendChild(clone);
-    clone.style.position = "absolute";
+    document.body.appendChild(clone);
+    clone.style.position = "fixed";
     clone.addEventListener("mouseover", moveNoButton);
     clone.addEventListener("touchstart", moveNoButton, { passive: false });
     noButtons.push(clone);
