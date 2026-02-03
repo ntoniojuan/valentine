@@ -2,19 +2,15 @@ const noButton = document.getElementById("no");
 const yesButton = document.getElementById("yes");
 
 const noTexts = [
-  "NO 😠",
-  "pls stop",
-  "why tho",
-  "WAIT",
-  "AJ PLEASE",
-  "😭😭😭",
-  "ok fine?",
-  "STOP HOVERING"
+  "NO 😠","pls stop","why tho","WAIT","DUPMPLING PLEASE","😭😭😭","ok fine?",
+  "STOP HOVERING","NOT TODAY 😤","try again maybe?","seriously?",
+  "🤯🤯🤯","I’m shy…","think again!"
 ];
 
 let yesScale = 1;
 
-function moveNoButton() {
+function moveNoButton(e) {
+  e.preventDefault(); // stop accidental mobile click
   const container = document.querySelector(".buttons");
 
   const maxX = container.clientWidth - noButton.offsetWidth;
@@ -30,22 +26,29 @@ function moveNoButton() {
   const randomText = noTexts[Math.floor(Math.random() * noTexts.length)];
   noButton.textContent = randomText;
 
-  // make YES button bigger
+  // YES button grows + pulse
   yesScale += 0.1;
   yesButton.style.transform = `scale(${yesScale})`;
+  yesButton.classList.add("pulse");
+  setTimeout(() => yesButton.classList.remove("pulse"), 300);
 }
 
 // desktop
 noButton.addEventListener("mouseover", moveNoButton);
 
-// mobile (tap)
-noButton.addEventListener("touchstart", moveNoButton);
+// mobile
+noButton.addEventListener("touchstart", moveNoButton, { passive: false });
 
+// YES button click
 yesButton.addEventListener("click", () => {
   confettiBoom();
-  setTimeout(() => {
-    alert("YAY!!! 💖 YOU’RE MY VALENTINE 💖");
-  }, 300);
+  const popup = document.getElementById("yes-popup");
+  popup.classList.remove("hidden");
+});
+
+// Close popup
+document.getElementById("close-popup").addEventListener("click", () => {
+  document.getElementById("yes-popup").classList.add("hidden");
 });
 
 // CONFETTI 🎉
